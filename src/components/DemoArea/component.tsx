@@ -1,23 +1,17 @@
-// import React from 'react'
-
-// export default function DemoArea() {
-//   return <div>DemoArea is a awesome component</div>
-// }
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Area } from '@ant-design/plots';
+import type { AreaConfig } from '@ant-design/charts';
+import { Area } from '@ant-design/charts';
 
 const DemoArea = () => {
-  const config = {
+  const config: AreaConfig = {
     data: {
       type: 'fetch',
-      value: 'https://assets.antv.antgroup.com/g2/aapl.json',
+      value: '/api/tags',
+      format: 'json',
     },
-    xField: (d) => new Date(d.date),
-    yField: 'close',
+    xField: 'stakeNo',
+    yField: 'vehCount',
     slider: {
-      x: {}
+      x: {},
     },
   };
 
