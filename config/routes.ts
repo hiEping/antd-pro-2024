@@ -12,112 +12,112 @@
  */
 export default [
   {
-    name: '数据大屏',
-    icon: 'icon-statistics',
-    path: '/bigscreen',
-    // layout:false,    
+    name: 'workplace',
+    icon: 'icon-xingzhuang',
+    path: '/workplace',
+    component: 'Workplace',
+  },
+  {
+    name: 'dashboard',
+    icon: 'icon-biaoge',
+    path: '/dashboard',
     routes: [
       {
-        name: '态势地图',
+        name: 'eventData',
+        path: '/dashboard/eventData',
+        component: 'Dashboard/EventData',
+      },
+      {
+        name: 'traffic',
+        path: '/dashboard/traffic',
+        component: 'Dashboard/Traffic',
+      },
+      {
+        name: 'drivingRisk',
+        path: '/dashboard/drivingRisk',
+        component: 'Dashboard/DrivingRisk',
+      },
+      {
+        name: 'riskReport',
+        path: '/dashboard/riskReport',
+        redirect: '/riskReport',
+      },
+    ],
+  },
+  {
+    name: 'bigscreen',
+    icon: 'icon-statistics',
+    path: '/bigscreen',
+    // layout:false,
+    routes: [
+      {
+        name: 'dataMap',
         path: '/bigscreen/dataMap',
         Component: 'Bigscreen/DataMap',
       },
       {
-        name: '轨迹跟踪',
+        name: 'vehTracking',
         path: '/bigscreen/vehTracking',
         Component: 'Bigscreen/VehTracking',
       },
       {
-        name: '事件处理',
+        name: 'eventHandling',
         path: '/bigscreen/eventHandling',
         Component: 'Bigscreen/EventHandling',
       },
-    ]
+    ],
   },
   {
-    name: '风险报告',
+    name: 'riskReport',
     icon: 'icon-saverity',
-    path: '/riskReport',    
+    path: '/riskReport',
     component: 'Dashboard/RiskReport',
     // 不展示顶栏
     headerRender: false,
     // 不展示页脚
     footerRender: false,
     // 不展示菜单
-    menuRender: false,    
+    menuRender: false,
   },
   {
-    name: '工作台',
-    icon: 'icon-xingzhuang',
-    path: '/workplace',
-    component: 'Workplace'
-  },
-  {
-    name: '数据看板',
-    icon: 'icon-biaoge',
-    path: '/dashboard',
-    routes: [
-      {
-        name: '视频事件',
-        path: '/dashboard/eventData',
-        component: 'Dashboard/EventData',
-      },
-      {
-        name: '交通状况',
-        path: '/dashboard/traffic',
-        component: 'Dashboard/Traffic',
-      },
-      {
-        name: '行车风险',
-        path: '/dashboard/drivingRisk',
-        component: 'Dashboard/DrivingRisk',
-      },
-      {
-        name: '风险报告',
-        path: '/dashboard/riskReport',
-        redirect: '/riskReport',
-      },
-    ]
-  },
-  {
-    name: '后台管理',
+    name: 'management',
     icon: 'icon-dangan',
     path: '/management',
     routes: [
       {
-        name: '用户管理',
+        name: 'users',
         path: '/management/users',
         component: 'Management/Users',
       },
       {
-        name: '权限管理',
+        name: 'roles',
         path: '/management/roles',
         component: 'Management/Roles',
       },
-    ]
+    ],
   },
   {
-    name: '参数配置',
+    name: 'systemParam',
     icon: 'icon-xitongguanli',
     access: 'canAdmin',
     path: '/systemParam',
     routes: [
       {
-        name: '道路参数',
+        name: 'roadPara',
         path: '/systemParam/roadPara',
         component: 'SystemParam/RoadPara',
       },
       {
-        name: '相机参数',
+        name: 'cameraPara',
         path: '/systemParam/cameraPara',
         component: 'SystemParam/CameraPara',
       },
       {
-        name: '检测参数',
+        name: 'detectingPara',
         path: '/systemParam/detectingPara',
         component: 'SystemParam/DetectingPara',
       },
-    ]
+    ],
   },
   {
     path: '/user',
