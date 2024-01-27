@@ -3,16 +3,6 @@ import { Area } from '@ant-design/plots';
 import { useState } from 'react';
 import { request } from 'umi';
 
-// interface JamDataType {
-//   kPart: number,
-//   mPart: string,
-//   whole: string,
-//   km: string,
-//   vehCount: number,
-//   jamIndex: number,
-//   oclock: number,
-// }
-
 const DemoArea = () => {
   const [jamData, setJamData] = useState([{ km: 'K123+456', jamIndex: 1.0 }]);
 
