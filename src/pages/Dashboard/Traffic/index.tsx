@@ -1,9 +1,9 @@
 import DemoArea from '@/components/DemoArea';
-import JamList from '@/components/JamList';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import type { DatePickerProps } from 'antd';
 import { Button, DatePicker, Flex, Space } from 'antd';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 // const onChange = (e: RadioChangeEvent) => {
 //   console.log(`radio checked:${e.target.value}`);
@@ -16,6 +16,20 @@ const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
 const dateFormat = 'YYYY/MM/DD';
 
 export default function Page() {
+  const [jamList, setJamList] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/trafficJam')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setJamList(data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <PageContainer
       fixedHeader
@@ -40,11 +54,9 @@ export default function Page() {
       <Flex gap="large" vertical>
         <ProCard title="交通拥堵状况" gutter={[16, 16]} ghost wrap>
           <ProCard colSpan={16} bordered title="各点位拥堵峰值">
-            <DemoArea />
+            <DemoArea jamDataList={jamList} />
           </ProCard>
-          <ProCard title="点位拥堵排名" colSpan={8} bordered>
-            <JamList />
-          </ProCard>
+          <ProCard title="点位拥堵排名" colSpan={8} bordered></ProCard>
           <ProCard title="拥堵24小时变化" colSpan={24} bordered>
             col24
           </ProCard>
