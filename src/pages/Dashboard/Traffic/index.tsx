@@ -1,6 +1,5 @@
-import type { JamDataType } from '@/components/DemoArea';
-import DemoArea from '@/components/DemoArea';
-import TopJamList from '@/components/TopJamList';
+import type { JamDataType } from '@/components/TrafficJam';
+import DemoArea, { TopJamList } from '@/components/TrafficJam';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import type { DatePickerProps } from 'antd';
 import { Button, DatePicker, Flex, message, Space } from 'antd';
@@ -35,7 +34,7 @@ export default function Page() {
 
   const top5JamList = (originList: JamDataType[]) => {
     const sortedList = originList.sort((a, b) => b.jamIndex - a.jamIndex);
-    if (sortedList.length > 5) return sortedList.slice(0, 6);
+    if (sortedList.length >= 5) return sortedList.slice(0, 5);
     return sortedList;
   };
 
@@ -67,7 +66,7 @@ export default function Page() {
             <DemoArea data={jamList} />
           </ProCard>
           <ProCard title="点位拥堵排名" colSpan={8} bordered>
-            <TopJamList data={top5JamList(jamList)} />
+            <TopJamList data={top5JamList([...jamList])} />
           </ProCard>
           <ProCard title="拥堵24小时变化" colSpan={24} bordered>
             col24

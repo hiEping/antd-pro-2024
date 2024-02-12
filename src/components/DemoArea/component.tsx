@@ -1,10 +1,10 @@
 import type { AreaConfig } from '@ant-design/plots';
 import { Area } from '@ant-design/plots';
 
-interface JamDataType {
+export type JamDataType = {
   km: string;
   jamIndex: number;
-}
+};
 
 export interface DemoAreaProps {
   jamDataList: JamDataType[];
