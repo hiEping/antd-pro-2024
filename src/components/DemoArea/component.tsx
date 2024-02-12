@@ -12,6 +12,7 @@ export interface DemoAreaProps {
 
 const DemoArea = (props: DemoAreaProps) => {
   const config: AreaConfig = {
+    autoFit: true,
     data: props.jamDataList,
     xField: 'km',
     yField: 'jamIndex',
