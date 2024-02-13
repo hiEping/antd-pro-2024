@@ -20,14 +20,12 @@ export default function Page() {
     fetch('/api/trafficJam')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setJamList(data.data);
       })
       .catch((e) => {
-        console.log(e);
         messageApi.open({
           type: 'error',
-          content: '获取[trafficJam]数据失败',
+          content: '获取[trafficJam]数据失败\n' + e.message,
         });
       });
   }, []);
@@ -62,15 +60,20 @@ export default function Page() {
       {contextHolder}
       <Flex gap="large" vertical>
         <ProCard title="交通拥堵状况" gutter={[16, 16]} ghost wrap>
-          <ProCard colSpan={16} bordered title="各点位拥堵峰值" style={{ height: 400 }}>
+          <ProCard
+            colSpan={16}
+            bordered
+            title="当日拥堵变化趋势（每5分钟）"
+            style={{ height: 400 }}
+          >
             <DemoArea data={jamList} />
           </ProCard>
-          <ProCard title="点位拥堵排名" colSpan={8} bordered>
+          <ProCard title="拥堵程度TOP 5" colSpan={8} bordered style={{ height: 400 }}>
             <TopJamList data={top5JamList([...jamList])} />
           </ProCard>
-          <ProCard title="拥堵24小时变化" colSpan={24} bordered>
+          {/* <ProCard title="拥堵24小时变化" colSpan={24} bordered>
             col24
-          </ProCard>
+          </ProCard> */}
         </ProCard>
         <ProCard title="交通流量状况" gutter={[16, 16]} ghost></ProCard>
         <ProCard title="道路服务水平" gutter={[16, 16]} ghost></ProCard>
