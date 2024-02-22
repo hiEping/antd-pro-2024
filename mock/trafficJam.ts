@@ -9,6 +9,9 @@ const jamData = mockjs.mock({
       // km: function () {
       //   return 'K' + this.whole.replace(' ', '+');
       // },
+      key: function () {
+        return this.timeOrder;
+      },
       timeName: function () {
         const totalminute = this.timeOrder * 5;
         const hourName = Math.floor(totalminute / 60);
@@ -36,56 +39,67 @@ const jamData = mockjs.mock({
 
 const segmentSpeedData = [
   {
+    key: 'K1+100',
     timeSegment: '14:25',
     roadSegment: 'K1+100',
     avgSpeed: 42,
   },
   {
+    key: 'K1+200',
     timeSegment: '14:25',
     roadSegment: 'K1+200',
     avgSpeed: 52,
   },
   {
+    key: 'K1+300',
     timeSegment: '14:25',
     roadSegment: 'K1+300',
     avgSpeed: 62,
   },
   {
+    key: 'K1+400',
     timeSegment: '14:25',
     roadSegment: 'K1+400',
     avgSpeed: 41,
   },
   {
+    key: 'K1+500',
     timeSegment: '14:25',
     roadSegment: 'K1+500',
     avgSpeed: 47,
   },
   {
+    key: 'K1+600',
     timeSegment: '14:25',
     roadSegment: 'K1+600',
     avgSpeed: 56,
   },
   {
+    key: 'K1+700',
     timeSegment: '14:25',
     roadSegment: 'K1+700',
     avgSpeed: 65,
   },
   {
+    key: 'K1+800',
     timeSegment: '14:25',
     roadSegment: 'K1+800',
     avgSpeed: 52,
   },
   {
+    key: 'K1+900',
     timeSegment: '14:25',
     roadSegment: 'K1+900',
     avgSpeed: 66,
   },
   {
+    key: 'K2+000',
     timeSegment: '14:25',
     roadSegment: 'K2+000',
     avgSpeed: 67,
   },
   {
+    key: 'K2+100',
     timeSegment: '14:25',
     roadSegment: 'K2+100',
     avgSpeed: 78,

@@ -19,6 +19,12 @@ const DemoArea = (props: DemoAreaProps) => {
     slider: {
       x: {},
     },
+    onReady: ({ chart }) => {
+      // Do something
+      chart.on('element:click', (ev) => {
+        console.log(ev);
+      });
+    },
   };
 
   return <Area {...config} />;

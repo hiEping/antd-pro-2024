@@ -1,11 +1,12 @@
-import type { AreaConfig, HeatmapConfig } from '@ant-design/plots';
-import { Area, Heatmap } from '@ant-design/plots';
+import type { ColumnConfig, HeatmapConfig } from '@ant-design/plots';
+import { Column, Heatmap } from '@ant-design/plots';
 import type { TableColumnsType } from 'antd';
 import { Table, Tag } from 'antd';
 import React from 'react';
 
 export interface JamDataType {
   key: React.Key;
+  timeOrder: number;
   timeName: number;
   jamIndex: number;
   avgSpeed: number;
@@ -14,6 +15,7 @@ export interface JamDataType {
 }
 
 export interface SegmentAvgSpeedType {
+  key: React.Key;
   timeSegment: string;
   roadSegment: string;
   avgSpeed: number;
@@ -25,46 +27,41 @@ export interface DemoAreaProps {
 
 const columns: TableColumnsType<JamDataType> = [
   {
+    // key: 'order',
     title: '序号',
     render: function (text, record, index) {
       return index + 1;
     },
   },
   {
-    title: '位置',
-    dataIndex: 'stakeNo',
+    // key: 'status',
+    title: '状态',
+    render: (text, record) => {
+      if (record.avgSpeed >= 80) return <Tag color="success">畅通</Tag>;
+      else if (record.avgSpeed < 66.67) return <Tag color="error">拥堵</Tag>;
+      else return <Tag color="warning">饱和</Tag>;
+    },
   },
   {
+    // key: 'spd',
+    title: '时速 / 流量',
+    render: (text, record) => {
+      return record.avgSpeed + ' / ' + record.vehCount;
+    },
+  },
+  {
+    // key: 'timeName',
     title: '时段',
     dataIndex: 'timeName',
   },
   {
-    title: '时速 / 状态',
-    dataIndex: 'avgSpeed',
-    render: (text, record) => {
-      if (record.avgSpeed >= 80)
-        return (
-          <span>
-            {record.avgSpeed} / <Tag color="success">畅通</Tag>
-          </span>
-        );
-      else if (record.avgSpeed >= 66.67 && record.avgSpeed < 80)
-        return (
-          <span>
-            {record.avgSpeed} / <Tag color="warning">饱和</Tag>
-          </span>
-        );
-      else if (record.avgSpeed < 66.67)
-        return (
-          <span>
-            {record.avgSpeed} / <Tag color="error">拥堵</Tag>
-          </span>
-        );
-    },
+    // key: 'stakeNo',
+    title: '位置',
+    dataIndex: 'stakeNo',
   },
 ];
 
-export function TopJamList(props: DemoAreaProps) {
+export function TopJamList(props: { data: JamDataType[] }) {
   return <Table dataSource={props.data} pagination={false} columns={columns} size="large" />;
 }
 
@@ -95,8 +92,11 @@ export function SegmentAvgSpeed(props: { data: SegmentAvgSpeedType[] }) {
   return <Heatmap {...config} />;
 }
 
-export default function DemoArea(props: DemoAreaProps) {
-  const config: AreaConfig = {
+export default function DemoArea(props: {
+  data: JamDataType[];
+  elementClickHandler: (timeName: string) => void;
+}) {
+  const config: ColumnConfig = {
     autoFit: true,
     data: props.data,
     xField: 'timeName',
@@ -119,6 +119,11 @@ export default function DemoArea(props: DemoAreaProps) {
         },
       ],
     },
+    onReady: ({ chart }) => {
+      chart.on('element:click', (ev) => {
+        props.elementClickHandler(ev.data.data.timeName);
+      });
+    },
   };
-  return <Area {...config} />;
+  return <Column {...config} />;
 }
