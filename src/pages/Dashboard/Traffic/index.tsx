@@ -4,7 +4,6 @@ import { PageContainer, ProCard } from '@ant-design/pro-components';
 import type { DatePickerProps } from 'antd';
 import { Button, DatePicker, Flex, message, Space } from 'antd';
 import dayjs from 'dayjs';
-import { isArray } from 'lodash';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
@@ -89,14 +88,16 @@ export default function Page() {
     >
       {contextHolder}
       <Flex gap="large" vertical>
-        <ProCard title="交通拥堵状况" gutter={16} ghost>
-          <ProCard direction="column" gutter={[0, 16]} ghost>
+        <ProCard title="交通拥堵状况" gutter={16} ghost 
+          style={{marginLeft: 'auto', marginRight: 'auto', maxWidth: 1440}}
+        >
+          <ProCard direction="column" gutter={[0, 16]} ghost >
             <ProCard title="当日拥堵变化趋势（每5分钟峰值）">
               <DemoArea data={jamList} elementClickHandler={handleColumnClick} />
             </ProCard>
             <ProCard
               title={
-                isArray(segmentAvgSpeedArr) && segmentAvgSpeedArr.length > 0
+                Array.isArray(segmentAvgSpeedArr) && segmentAvgSpeedArr.length > 0
                   ? '道路各分段车速 - ' + segmentAvgSpeedArr[0].timeSegment
                   : '道路各分段车速'
               }
@@ -105,12 +106,13 @@ export default function Page() {
               <SegmentAvgSpeed data={segmentAvgSpeedArr} />
             </ProCard>
           </ProCard>
-          <ProCard title="拥堵时刻TOP 10" colSpan={8}>
+          <ProCard title="拥堵时刻TOP 10" colSpan={8} >
             <TopJamList data={top5JamList([...jamList])} />
           </ProCard>
         </ProCard>
-
-        <ProCard title="交通流量状况" gutter={[16, 16]} ghost></ProCard>
+        <ProCard title="交通流量状况" gutter={[16, 16]} ghost        
+        // style={{marginLeft: 65, marginRight: 65}}
+        ></ProCard>
         <ProCard title="道路服务水平" gutter={[16, 16]} ghost></ProCard>
       </Flex>
     </PageContainer>

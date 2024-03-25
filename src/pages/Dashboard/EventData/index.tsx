@@ -283,10 +283,12 @@ export default function Page() {
   }  
 
   return (
-    <PageContainer>
+    <PageContainer fixedHeader>
       <Flex vertical gap={32}>
         <Card
+          style={{marginLeft: 'auto', marginRight: 'auto', width: 1440, marginTop: 32}}
           title='事件分类统计'
+          bordered= {false}
           extra={
             <Space>
               <Popover trigger='click' placement="bottomRight"
@@ -343,7 +345,6 @@ export default function Page() {
               </Popover>
             </Space>
           }
-          bordered={false}
         >
           <Table 
             columns={tableColumns}
@@ -400,8 +401,9 @@ export default function Page() {
             }}
           />
         </Card>
-        <Card title='历史事件查询'>
-
+        <Card title='历史事件查询' 
+          style={{marginLeft: 'auto', marginRight: 'auto', width: 1440}}
+          >
         </Card>
       </Flex>
     </PageContainer>
